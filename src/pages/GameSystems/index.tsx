@@ -1,7 +1,7 @@
 // src/pages/GameSystems/index.tsx
 import React, { useState, useEffect } from 'react';
-import { gameSystemsService } from '../../api'; // Updated path
-import type { GameSystemsResponse, CreateGameSystemRequest } from '../../api'; // Updated path
+import { gameSystemsService } from '@/api'; // Updated path
+import type { GameSystemsResponse, CreateGameSystemRequest } from '@/api'; // Updated path
 import type { GameSystemFormData } from './types'
 
 const GameSystemsPage: React.FC = () => {

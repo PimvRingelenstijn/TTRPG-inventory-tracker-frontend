@@ -1,3 +1,4 @@
+// src/api/client.ts
 const API_BASE_URL = 'http://localhost:8000'; // Your FastAPI backend URL
 
 // Base fetch wrapper with consistent error handling

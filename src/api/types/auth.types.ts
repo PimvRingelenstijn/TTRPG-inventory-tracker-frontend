@@ -1,6 +1,4 @@
 // src/api/types/auth.types.ts
-
-// API request/response types
 export interface UserRegistrationRequest {
     email: string;
     password: string;

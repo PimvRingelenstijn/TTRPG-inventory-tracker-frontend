@@ -1,6 +1,7 @@
 // src/api/services/gameSystems.ts
 import { fetchAPI } from '../client';
-import type { GameSystemsResponse, CreateGameSystemRequest } from '../types/';
+// noinspection ES6PreferShortImport
+import type { GameSystemsResponse, CreateGameSystemRequest } from '../types/gameSystems.types';
 
 
 export const gameSystemsService = {
@@ -19,18 +20,3 @@ export const gameSystemsService = {
         return data;
     }
 };
-
-// export const getGameSystems = async (): Promise<GameSystemsResponse[]> => {
-//     const data = await fetchAPI<GameSystemsResponse[]>('/game-systems');
-//     console.log('Received game systems data:', data);
-//     return data;
-// };
-//
-// export const createGameSystem = async (gameSystem: CreateGameSystemRequest): Promise<GameSystemsResponse> => {
-//     const data = await fetchAPI<GameSystemsResponse>('/game-systems', {
-//         method: 'POST',
-//         body: JSON.stringify(gameSystem),
-//     });
-//     console.log('Created game system:', data);
-//     return data;
-// };
