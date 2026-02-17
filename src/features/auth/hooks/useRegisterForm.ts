@@ -1,28 +1,21 @@
 // src/features/auth/hooks/useRegisterForm.ts
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from '@/hooks/useForm';
 import { authService } from '@/api';
 import type { UserRegistrationRequest } from '@/api';
 import type { RegisterFormData } from '../types';
 
 export const useRegisterForm = () => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
     const navigate = useNavigate();
-    const [formData, setFormData] = useState<RegisterFormData>({
+    const { formData, handleChange} = useForm<RegisterFormData>({
         email: '',
         password: '',
         username: '',
     });
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+    const [error, setError] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const validateForm = (): boolean => {
         if (formData.password !== confirmPassword) {
@@ -70,7 +63,7 @@ export const useRegisterForm = () => {
         confirmPassword,
         error,
         loading,
-        handleChange,
+        handleChange,  // From useForm
         setConfirmPassword,
         handleSubmit,
     };

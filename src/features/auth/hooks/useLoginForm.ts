@@ -1,28 +1,19 @@
 // src/features/auth/hooks/useLoginForm.ts
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from '@/hooks/useForm';
 import { authService } from '@/api';
 import type { UserLoginRequest } from '@/api';
 import type { LoginFormData } from '../types';
 
 export const useLoginForm = () => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
     const navigate = useNavigate();
-    const [formData, setFormData] = useState<LoginFormData>({
+    const { formData, handleChange} = useForm<LoginFormData>({
         email: '',
         password: '',
     });
-
-
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+    const [error, setError] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -36,7 +27,6 @@ export const useLoginForm = () => {
             };
 
             await authService.login(loginRequest);
-            alert(`Login successful!`);
             navigate('/dashboard');
         } catch (err: any) {
             setError(err.message || 'Login failed');
@@ -49,7 +39,7 @@ export const useLoginForm = () => {
         formData,
         error,
         loading,
-        handleChange,
+        handleChange,  // From useForm
         handleSubmit,
     };
 };
