@@ -1,5 +1,5 @@
 // src/api/client.ts
-const API_BASE_URL = 'http://localhost:8000'; // Your FastAPI backend URL
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL; // Your FastAPI backend URL
 
 // Base fetch wrapper with consistent error handling
 export const fetchAPI = async <T>(

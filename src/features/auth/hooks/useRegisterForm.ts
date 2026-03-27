@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '@/hooks/useForm';
 import { authService } from '@/api';
-import type { UserRegistrationRequest } from '@/api';
+import type { RegistrationRequest } from '@/api';
 import type { RegisterFormData } from '../types';
 
 export const useRegisterForm = () => {
@@ -42,15 +42,16 @@ export const useRegisterForm = () => {
         setLoading(true);
 
         try {
-            const registrationRequest: UserRegistrationRequest = {
+            const registrationRequest: RegistrationRequest = {
                 email: formData.email,
                 password: formData.password,
                 username: formData.username,
             };
 
             await authService.register(registrationRequest);
-            alert('Registration successful! Please login.');
-            navigate('/login');
+            navigate('/login', {
+                state: { message: 'Registration successful! Please login.' }
+            });
         } catch (err: any) {
             setError(err.message || 'Registration failed');
         } finally {

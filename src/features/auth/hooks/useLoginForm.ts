@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '@/hooks/useForm';
 import { authService } from '@/api';
-import type { UserLoginRequest } from '@/api';
+import { useAuth } from '@/contexts/AuthContext';
+import type { LoginRequest, UserDataResponse } from '@/api';
 import type { LoginFormData } from '../types';
 
 export const useLoginForm = () => {
     const navigate = useNavigate();
+    const { setUser } = useAuth();
     const { formData, handleChange} = useForm<LoginFormData>({
         email: '',
         password: '',
@@ -21,12 +23,15 @@ export const useLoginForm = () => {
         setLoading(true);
 
         try {
-            const loginRequest: UserLoginRequest = {
+            const loginRequest: LoginRequest = {
                 email: formData.email,
                 password: formData.password,
             };
 
-            await authService.login(loginRequest);
+            const userData: UserDataResponse = await authService.login(loginRequest);
+
+            setUser(userData);
+
             navigate('/dashboard');
         } catch (err: any) {
             setError(err.message || 'Login failed');

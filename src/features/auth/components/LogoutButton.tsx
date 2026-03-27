@@ -1,25 +1,25 @@
 // src/features/auth/components/LogoutButton.tsx
 import React from 'react';
-import { useLogout } from '../hooks/useLogout';
+import { useAuth } from '@/contexts/AuthContext';
 
 const LogoutButton: React.FC = () => {
-    const { handleLogout, loading } = useLogout();
+    const { isLoading, logout } = useAuth();
 
     return (
         <button
-            onClick={handleLogout}
-            disabled={loading}
+            onClick={logout}
+            disabled={isLoading}
             style={{
                 padding: '10px 20px',
-                backgroundColor: loading ? '#ccc' : '#dc3545',
+                backgroundColor: isLoading ? '#ccc' : '#dc3545',
                 color: 'white',
                 border: 'none',
-                cursor: loading ? 'not-allowed' : 'pointer',
+                cursor: isLoading ? 'not-allowed' : 'pointer',
                 marginTop: '20px',
-                opacity: loading ? 0.7 : 1
+                opacity: isLoading ? 0.7 : 1
             }}
         >
-            {loading ? 'Logging out...' : 'Logout'}
+            {isLoading ? 'Logging out...' : 'Logout'}
         </button>
     );
 };

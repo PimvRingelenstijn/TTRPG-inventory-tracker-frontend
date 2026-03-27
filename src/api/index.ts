@@ -6,10 +6,9 @@ export { gameSystemsService } from './services/gameSystems';
 // ================= API TYPES =================
 // Auth types
 export type {
-    UserRegistrationRequest,
-    UserLoginRequest,
-    AuthResponse,
-    UserProfileResponse
+    RegistrationRequest,
+    LoginRequest,
+    UserDataResponse
 } from './types/auth.types';
 
 // Game system types

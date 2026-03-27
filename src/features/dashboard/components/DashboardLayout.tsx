@@ -1,19 +1,19 @@
 // src/features/dashboard/components/DashboardLayout.tsx
 import React from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { UserInfo, LogoutButton, LoadingState } from '@/features/auth/components';
-import { useUser } from '@/features/auth/hooks/useUser.ts';
 
 const DashboardLayout: React.FC = () => {
-    const { user, loading } = useUser();
+    const { isLoading } = useAuth();
 
-    if (loading) {
+    if (isLoading) {
         return <LoadingState />;
     }
 
     return (
         <div style={{ padding: '20px' }}>
             <h1>Dashboard</h1>
-            {user && <UserInfo user={user} />}
+            <UserInfo />
             <LogoutButton />
         </div>
     );

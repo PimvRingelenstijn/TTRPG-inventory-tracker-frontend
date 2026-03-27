@@ -13,18 +13,3 @@ export interface RegisterFormData {
     confirmPassword?: string;
 }
 
-export interface UserDisplayData {
-    id: string;
-    email: string;
-    username: string;
-    created_at: string;
-}
-
-export interface AuthFormErrors {
-    email?: string;
-    password?: string;
-    username?: string;
-    confirmPassword?: string;
-}
-
-export type AuthStatus = 'idle' | 'loading' | 'success' | 'error';

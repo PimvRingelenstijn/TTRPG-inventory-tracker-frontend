@@ -2,22 +2,21 @@
 import { fetchAPI } from '../client';
 // noinspection ES6PreferShortImport
 import type {
-    UserRegistrationRequest,
-    UserLoginRequest,
-    AuthResponse,
-    UserProfileResponse
+    RegistrationRequest,
+    LoginRequest,
+    UserDataResponse
 } from '../types/auth.types';
 
 export const authService = {
-    async register(userData: UserRegistrationRequest): Promise<AuthResponse> {
-        return fetchAPI<AuthResponse>('/auth/register', {
+    async register(userData: RegistrationRequest): Promise<void> {
+        await fetchAPI('/auth/register', {
             method: 'POST',
             body: JSON.stringify(userData)
         });
     },
 
-    async login(loginData: UserLoginRequest): Promise<void>{
-        await fetchAPI('/auth/login', {
+    async login(loginData: LoginRequest): Promise<UserDataResponse> {
+        return await fetchAPI<UserDataResponse>('/auth/login', {
             method: 'POST',
             body: JSON.stringify(loginData)
         });
@@ -29,8 +28,8 @@ export const authService = {
         });
     },
 
-    async getCurrentUser(): Promise<{ user: UserProfileResponse }> {
-        return fetchAPI<{ user: UserProfileResponse }>('/profile/me', {
+    async getCurrentUser(): Promise<UserDataResponse> {
+            return await fetchAPI<UserDataResponse>('/auth/me', {
             method: 'GET'
         });
     },

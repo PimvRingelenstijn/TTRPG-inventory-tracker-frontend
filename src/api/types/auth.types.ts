@@ -1,25 +1,17 @@
 // src/api/types/auth.types.ts
-export interface UserRegistrationRequest {
+export interface RegistrationRequest {
     email: string;
     password: string;
     username: string;
 }
 
-export interface UserLoginRequest {
+export interface LoginRequest {
     email: string;
     password: string;
 }
 
-export interface AuthResponse {
-    user: {
-        id: string;
-        email: string;
-    };
-    expires_at?: string;
-}
-
-export interface UserProfileResponse {
-    id: string;
+export interface UserDataResponse {
+    uuid: string;
     email: string;
     username: string;
     created_at: string;

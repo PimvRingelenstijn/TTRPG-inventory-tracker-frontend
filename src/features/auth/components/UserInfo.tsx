@@ -1,17 +1,14 @@
 // src/features/auth/components/UserInfo.tsx
 import React from 'react';
-import type { UserDisplayData } from '../types';
+import { useAuth } from '@/contexts/AuthContext';
 
-interface UserInfoProps {
-    user: UserDisplayData;
-}
-
-const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
+const UserInfo: React.FC = () => {
+    const { user } = useAuth();
     return (
         <div className="user-info">
             <p>Welcome, {user.email}!</p>
             <p>Username: {user.username}</p>
-            <p>User ID: {user.id}</p>
+            <p>User ID: {user.uuid}</p>
             <p>Joined: {new Date(user.created_at).toLocaleDateString()}</p>
         </div>
     );
